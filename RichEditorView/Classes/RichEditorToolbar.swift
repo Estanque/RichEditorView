@@ -24,14 +24,29 @@ import UIKit
     optional func richEditorToolbarChangeBackgroundColor(toolbar: RichEditorToolbar)
 
     /**
-        Called when the Insert Image toolbar item is pressed.
-    */
+     Called when the Insert Image toolbar item is pressed.
+     */
     optional func richEditorToolbarInsertImage(toolbar: RichEditorToolbar)
 
     /**
         Called when the Insert Link toolbar item is pressed.
     */
     optional func richEditorToolbarInsertLink(toolbar: RichEditorToolbar)
+    /**
+     Called when the Change Font toolbar item is pressed.
+     */
+    optional func richEditorToolbarChangeFont(toolbar: RichEditorToolbar)
+
+    /**
+        Called when the Change Font Size toolbar item is pressed.
+    */
+    optional func richEditorToolbarChangeFontSize(toolbar: RichEditorToolbar)
+    
+    
+    /**
+        Called when the Isert Link toolbar item is pressed.
+    */
+    optional func richEditorToolbarChangeInsertLink(toolbar: RichEditorToolbar)
 }
 
 

@@ -299,6 +299,11 @@ extension RichEditorView {
         runJS("RE.setJustifyRight();")
     }
     
+    public func insertBase64Image(base64Image: String) {
+        runJS("RE.prepareInsert();")
+        runJS("insertBase64Image('\(base64Image)');")
+    }
+    
     public func insertImage(url: String, alt: String) {
         runJS("RE.prepareInsert();")
         runJS("RE.insertImage('\(escape(url))', '\(escape(alt))');")
@@ -307,6 +312,24 @@ extension RichEditorView {
     public func insertLink(href: String, title: String) {
         runJS("RE.prepareInsert();")
         runJS("RE.insertLink('\(escape(href))', '\(escape(title))');")
+    }
+    
+    public func quickLink() {
+        runJS("RE.quickLink();")
+    }
+    
+    public func setScalableFontSize(size: Int) {
+        restoreSelection()
+        runJS("document.execCommand('fontSize', false, \(size));")
+    }
+    
+    public func setFont(fontName: String) {
+        restoreSelection()
+        runJS("document.execCommand('fontName', false, '\(fontName)');")
+    }
+    
+    public func restoreSelection() {
+        runJS("RE.restorerange();")
     }
     
     public func focus() {
