@@ -193,6 +193,12 @@ RE.insertImage = function(url, alt) {
     RE.callback("input");
 }
 
+RE.insertBase64Image = function(base64) {
+    var html = '<img src="data:image/png;base64,' + base64 + '" />';
+    RE.insertHTML(html);
+    RE.callback("input");
+}
+
 RE.setBlockquote = function() {
     document.execCommand('formatBlock', false, '<blockquote>');
 }
@@ -219,6 +225,38 @@ RE.insertLink = function(url, title) {
         }
     }
     RE.callback("input");
+}
+
+RE.quickLink = function() {
+    
+    var sel = document.getSelection();
+    var link_url = "";
+    var test = new String(sel);
+    var mailregexp = new RegExp("^(.+)(\@)(.+)$", "gi");
+    if (test.search(mailregexp) == -1) {
+        checkhttplink = new RegExp("^http\:\/\/", "gi");
+        if (test.search(checkhttplink) == -1) {
+            checkanchorlink = new RegExp("^\#", "gi");
+            if (test.search(checkanchorlink) == -1) {
+                link_url = "http://" + sel;
+            } else {
+                link_url = sel;
+            }
+        } else {
+            link_url = sel;
+        }
+    } else {
+        checkmaillink = new RegExp("^mailto\:", "gi");
+        if (test.search(checkmaillink) == -1) {
+            link_url = "mailto:" + sel;
+        } else {
+            link_url = sel;
+        }
+    }
+    
+    var html_code = '<a href="' + link_url + '">' + sel + '</a>';
+    RE.insertHTML(html_code);
+    
 }
 
 RE.prepareInsert = function() {
