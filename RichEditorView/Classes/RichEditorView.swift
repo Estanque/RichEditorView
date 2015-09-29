@@ -308,7 +308,7 @@ extension RichEditorView {
     
     public func insertBase64Image(base64Image: String) {
         runJS("RE.prepareInsert();")
-        runJS("insertBase64Image('\(base64Image)');")
+        runJS("RE.insertBase64Image('\(base64Image)');")
     }
     
     public func insertImage(url: String, alt: String) {
