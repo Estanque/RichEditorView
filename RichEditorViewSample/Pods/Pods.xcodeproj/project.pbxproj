@@ -89,6 +89,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+
 		03E3A79991DCD1BFC42B744B8EC69336 /* clear@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "clear@2x.png"; sourceTree = "<group>"; };
 		05260C3FF7F834BF6FCBC71F1B62A848 /* justify_left.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = justify_left.png; sourceTree = "<group>"; };
 		0DB9A61ABF722EF1AB4F165099AB6F24 /* h3@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "h3@2x.png"; sourceTree = "<group>"; };
@@ -551,6 +552,7 @@
 				F7B62A2153CC52A763768BAE69AC1906 /* undo@2x.png in Resources */,
 				83D458ED4D5766151F1034570C466992 /* unordered_list.png in Resources */,
 				D547A39D72E855F4DB8DDDF90D916EB0 /* unordered_list@2x.png in Resources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
