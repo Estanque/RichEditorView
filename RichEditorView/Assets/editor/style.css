@@ -47,8 +47,8 @@ body, h1, p {
 
 #editor {
     min-height: 100%;
-	font-family: 'HelveticaNeue';
-	color:#666666; 
+	font-family: 'Arial';
+	color:#000000;
 	line-height:28px; 
-	font-size: 12pt;
+	font-size: 2;
 }
