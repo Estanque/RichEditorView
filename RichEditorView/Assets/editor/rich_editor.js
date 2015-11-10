@@ -19,9 +19,50 @@ var RE = {};
 
 window.onload = function() {
     RE.callback("ready");
+    RE.initTouchEventListeners();
 };
 
+
+var RE = {};
+
+RE.currentSelection;
+
+RE.isDragging = false;
+
 RE.editor = document.getElementById('editor');
+
+RE.initTouchEventListeners = function() {
+    
+    // Make sure that when we tap anywhere in the document we focus on the editor
+    window.addEventListener('touchmove', function(event) {
+        RE.isDragging = true;
+    }, false);
+    window.addEventListener('touchstart', function(event) {
+        RE.isDragging = false;
+                            
+    }, false);
+    window.addEventListener('touchend', function(event) {
+        if (!RE.isDragging && (document.activeElement !== RE.editor)) {
+            setEndOfContenteditable(RE.editor);
+            RE.editor.focus();
+        }
+    }, false);
+};
+
+/**
+ *  Sets the focus at the end of the editable element
+ */
+function setEndOfContenteditable(contentEditableElement) {
+    var range,selection;
+    if(document.createRange) {
+        range = document.createRange();//Create a range (a range is a like the seElection but invisible)
+        range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
+        range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+        selection = window.getSelection();//get the selection object (allows you to change selection)
+        selection.removeAllRanges();//remove any selections already made
+        selection.addRange(range);//make the range you have just created the visible selection
+    }
+}
 
 // Not universally supported, but seems to work in iOS 7 and 8
 document.addEventListener("selectionchange", function() {
