@@ -94,6 +94,10 @@ public class RichEditorToolbar: UIView {
             updateToolbar()
         }
     }
+    
+    public override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+        return false
+    }
 
     private var toolbarScroll: UIScrollView
     private var toolbar: UIToolbar

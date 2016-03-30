@@ -56,7 +56,18 @@ import UIKit
     RichEditorView is a UIView that displays richly styled text, and allows it to be edited in a WYSIWYG fashion.
 */
 public class RichEditorView: UIView {
-
+    
+    /// Use UIWebView subclass because of bug with share button
+    private class RichEditorWebView: UIWebView {
+        
+        static var AllowedActions = [Selector("cut:"), Selector("copy:"), Selector("paste:")]
+        
+        override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+            return false
+        }
+        
+    }
+    
     /**
         The delegate that will receive callbacks when certain actions are completed.
     */
@@ -125,13 +136,13 @@ public class RichEditorView: UIView {
     // MARK: - Initialization
     
     public override init(frame: CGRect) {
-        webView = UIWebView()
+        webView = RichEditorWebView()
         super.init(frame: frame)
         setup()
     }
 
     required public init?(coder aDecoder: NSCoder) {
-        webView = UIWebView()
+        webView = RichEditorWebView()
         super.init(coder: aDecoder)
         setup()
     }
