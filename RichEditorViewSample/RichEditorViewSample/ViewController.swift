@@ -66,6 +66,10 @@ extension ViewController: RichEditorDelegate {
 }
 
 extension ViewController: RichEditorToolbarDelegate {
+    
+    func richEditorToolbarChangeFontSize(toolbar: RichEditorToolbar) {
+        toolbar.editor?.setScalableFontSize(7)
+    }
 
     private func randomColor() -> UIColor {
         let colors = [
