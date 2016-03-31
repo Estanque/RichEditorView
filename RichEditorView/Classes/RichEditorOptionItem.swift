@@ -153,11 +153,7 @@ public enum RichEditorOptions: RichEditorOption {
         }
         
         let bundle = NSBundle(forClass: RichEditorToolbar.self)
-        if #available(iOS 8.0, *) {
-            return UIImage(named: name, inBundle: bundle, compatibleWithTraitCollection: nil)
-        } else {
-            return nil
-        }
+        return UIImage(named: name, inBundle: bundle, compatibleWithTraitCollection: nil)
     }
     
     public func title() -> String {

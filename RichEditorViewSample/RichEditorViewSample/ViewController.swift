@@ -33,6 +33,8 @@ class ViewController: UIViewController {
         let item = RichEditorOptionItem(image: nil, title: "Clear") { toolbar in
             toolbar?.editor?.setHTML("")
         }
+        
+        toolbar.editor?.setHTML("<b>Hello</b> world")
 
         var options = toolbar.options
         options.append(item)

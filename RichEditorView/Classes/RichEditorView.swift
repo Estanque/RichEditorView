@@ -60,12 +60,6 @@ public class RichEditorView: UIView {
     /// Use UIWebView subclass because of bug with share button
     private class RichEditorWebView: UIWebView {
         
-        static var AllowedActions = [Selector("cut:"), Selector("copy:"), Selector("paste:")]
-        
-        override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
-            return false
-        }
-        
     }
     
     /**
