@@ -34,7 +34,9 @@ class ViewController: UIViewController {
             toolbar?.editor?.setHTML("")
         }
         
-        toolbar.editor?.setHTML("<b>Hello</b> world")
+        let html = "<b>Hello</b><font face=\"sans-serif\"> world</font>" + "<font face=\"sans-serif\"><span>й-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакойй-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой</span></font>"
+        
+        toolbar.editor?.setHTML(html)
 
         var options = toolbar.options
         options.append(item)

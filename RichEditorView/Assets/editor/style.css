@@ -35,6 +35,10 @@ div {
     min-height: 28px;
 }
 
+span {
+    font-family: 'Arial';
+}
+
 #editor {
     -webkit-user-select: auto !important;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
