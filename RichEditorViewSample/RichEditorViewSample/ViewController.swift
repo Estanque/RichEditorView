@@ -34,7 +34,11 @@ class ViewController: UIViewController {
             toolbar?.editor?.setHTML("")
         }
         
-        let html = "<b>Hello</b><font face=\"sans-serif\"> world</font>" + "<font face=\"sans-serif\"><span>й-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакойй-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой</span></font>"
+        var html = "<span style=\"font-family: sans-serif; font-size: 12.8px; line-height: 19.2px; background-color: rgb(255, 255, 255);\">быть:</span><ul style=\"line-height: 19.2px; margin: 0.3em 0px 0px 1.6em; padding: 0px; list-style-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAANAQMAAABb8jbLAAAABlBMVEX///8AUow5QSOjAAAAAXRSTlMAQObYZgAAABNJREFUCB1jYEABBQw/wLCAgQEAGpIDyT0IVcsAAAAASUVORK5CYII=&quot;); font-family: sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);\"><li style=\"margin-bottom: 0.1em;\">Карточка конкретного объекта.</li></ul>"
+        
+        html += "<ul><li>hhhh</li></ul><br/><b>Hello</b><font face=\"sans-serif\"> world</font>" + "<font face=\"sans-serif\"><span>й-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакойй-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой</span></font>" +
+            "<font face=\"sans-serif\"><span style=\"-webkit-tap-highlight-color: rgba(26, 26, 26, 0.301961); -webkit-text-size-adjust: 100%; background-color: rgba(255, 255, 255, 0);\">й-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакойй-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой</span></font></div>"
+            
         
         toolbar.editor?.setHTML(html)
 

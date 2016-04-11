@@ -16,6 +16,10 @@
 
 @charset "UTF-8";
 
+* {
+    font-family: 'Arial';
+}
+
 html {
     height: 100%;
 }
@@ -30,7 +34,7 @@ body, h1, p {
 }
 
 span {
-    font-family: 'Arial';
+    font-family: 'Arial' !important;
 }
 
 #editor {
