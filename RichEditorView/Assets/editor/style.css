@@ -16,10 +16,6 @@
 
 @charset "UTF-8";
 
-* {
-    font-family: 'Arial';
-}
-
 html {
     height: 100%;
 }
@@ -32,6 +28,7 @@ body {
 body, h1, p {
     margin: 0;
 }
+
 
 div {
     display: block;
@@ -63,6 +60,8 @@ span {
     width: 96%;
     height: 100%;
     min-height: 100%;
+    margin-right: auto;
+    margin-left: auto;
     overflow: auto;
     display: block;
 /*    font-family: 'Arial';*/
