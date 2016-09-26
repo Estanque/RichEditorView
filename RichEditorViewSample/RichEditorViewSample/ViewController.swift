@@ -31,7 +31,7 @@ class ViewController: UIViewController {
 
         // We will create a custom action that clears all the input text when it is pressed
         let item = RichEditorOptionItem(image: nil, title: "Clear") { toolbar in
-            toolbar?.editor?.setHTML("")
+            toolbar?.editor?.setHTML(html: "")
         }
         
         var html = "<span style=\"font-family: sans-serif; font-size: 12.8px; line-height: 19.2px; background-color: rgb(255, 255, 255);\">быть:</span><ul style=\"line-height: 19.2px; margin: 0.3em 0px 0px 1.6em; padding: 0px; list-style-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAANAQMAAABb8jbLAAAABlBMVEX///8AUow5QSOjAAAAAXRSTlMAQObYZgAAABNJREFUCB1jYEABBQw/wLCAgQEAGpIDyT0IVcsAAAAASUVORK5CYII=&quot;); font-family: sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);\"><li style=\"margin-bottom: 0.1em;\">Карточка конкретного объекта.</li></ul>"
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
             "<font face=\"sans-serif\"><span style=\"-webkit-tap-highlight-color: rgba(26, 26, 26, 0.301961); -webkit-text-size-adjust: 100%; background-color: rgba(255, 255, 255, 0);\">й-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакойй-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой-то любой тексткакой</span></font></div>"
             
         
-        toolbar.editor?.setHTML(html)
+        toolbar.editor?.setHTML(html: html)
 
         var options = toolbar.options
         options.append(item)
@@ -76,17 +76,17 @@ extension ViewController: RichEditorDelegate {
 extension ViewController: RichEditorToolbarDelegate {
     
     func richEditorToolbarChangeFontSize(toolbar: RichEditorToolbar) {
-        toolbar.editor?.setScalableFontSize(7)
+        toolbar.editor?.setScalableFontSize(size: 7)
     }
 
     private func randomColor() -> UIColor {
         let colors = [
-            UIColor.redColor(),
-            UIColor.orangeColor(),
-            UIColor.yellowColor(),
-            UIColor.greenColor(),
-            UIColor.blueColor(),
-            UIColor.purpleColor()
+            UIColor.red,
+            UIColor.orange,
+            UIColor.yellow,
+            UIColor.green,
+            UIColor.blue,
+            UIColor.purple
         ]
 
         let color = colors[Int(arc4random_uniform(UInt32(colors.count)))]
@@ -95,22 +95,22 @@ extension ViewController: RichEditorToolbarDelegate {
 
     func richEditorToolbarChangeTextColor(toolbar: RichEditorToolbar) {
         let color = randomColor()
-        toolbar.editor?.setTextColor(color)
+        toolbar.editor?.setTextColor(color: color)
     }
 
     func richEditorToolbarChangeBackgroundColor(toolbar: RichEditorToolbar) {
         let color = randomColor()
-        toolbar.editor?.setTextBackgroundColor(color)
+        toolbar.editor?.setTextBackgroundColor(color: color)
     }
 
     func richEditorToolbarInsertImage(toolbar: RichEditorToolbar) {
-        toolbar.editor?.insertImage("https://gravatar.com/avatar/696cf5da599733261059de06c4d1fe22", alt: "Gravatar")
+        toolbar.editor?.insertImage(url: "https://gravatar.com/avatar/696cf5da599733261059de06c4d1fe22", alt: "Gravatar")
     }
 
     func richEditorToolbarInsertLink(toolbar: RichEditorToolbar) {
         // Can only add links to selected text, so make sure there is a range selection first
-        if let hasSelection = toolbar.editor?.rangeSelectionExists() where hasSelection {
-            toolbar.editor?.insertLink("http://github.com/cjwirth/RichEditorView", title: "Github Link")
+        if let hasSelection = toolbar.editor?.rangeSelectionExists(), hasSelection {
+            toolbar.editor?.insertLink(href: "http://github.com/cjwirth/RichEditorView", title: "Github Link")
         }
     }
 }
