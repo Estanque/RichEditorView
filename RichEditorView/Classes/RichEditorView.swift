@@ -16,63 +16,63 @@ import UIKit
         Called when the inner height of the text being displayed changes
         Can be used to update the UI
     */
-    optional func richEditor(editor: RichEditorView, heightDidChange height: Int)
+    @objc optional func richEditor(editor: RichEditorView, heightDidChange height: Int)
 
     /**
         Called whenever the content inside the view changes
     */
-    optional func richEditor(editor: RichEditorView, contentDidChange content: String)
+    @objc optional func richEditor(editor: RichEditorView, contentDidChange content: String)
 
     /**
         Called when the rich editor starts editing
     */
-    optional func richEditorTookFocus(editor: RichEditorView)
+    @objc optional func richEditorTookFocus(editor: RichEditorView)
     
     /**
         Called when the rich editor stops editing or loses focus
     */
-    optional func richEditorLostFocus(editor: RichEditorView)
+    @objc optional func richEditorLostFocus(editor: RichEditorView)
     
     /**
         Called when the RichEditorView has become ready to receive input
         More concretely, is called when the internal UIWebView loads for the first time, and contentHTML is set
     */
-    optional func richEditorDidLoad(editor: RichEditorView)
+    @objc optional func richEditorDidLoad(editor: RichEditorView)
     
     /**
         Called when the internal UIWebView begins loading a URL that it does not know how to respond to
         For example, if there is an external link, and then the user taps it
     */
-    optional func richEditor(editor: RichEditorView, shouldInteractWithURL url: NSURL) -> Bool
+    @objc optional func richEditor(editor: RichEditorView, shouldInteractWithURL url: URL) -> Bool
     
     /**
         Called when custom actions are called by callbacks in the JS
         By default, this method is not used unless called by some custom JS that you add
     */
-    optional func richEditor(editor: RichEditorView, handleCustomAction action: String)
+    @objc optional func richEditor(editor: RichEditorView, handleCustomAction action: String)
 }
 
 /**
     RichEditorView is a UIView that displays richly styled text, and allows it to be edited in a WYSIWYG fashion.
 */
-public class RichEditorView: UIView {
+open class RichEditorView: UIView {
     
     /// Use UIWebView subclass because of bug with share button
-    private class RichEditorWebView: UIWebView {
+    fileprivate class RichEditorWebView: UIWebView {
         
     }
     
     /**
         The delegate that will receive callbacks when certain actions are completed.
     */
-    public weak var delegate: RichEditorDelegate?
+    open weak var delegate: RichEditorDelegate?
 
     /**
         Whether or not scroll is enabled on the view.
     */
-    public var scrollEnabled: Bool = true {
+    open var scrollEnabled: Bool = true {
         didSet {
-            webView.scrollView.scrollEnabled = scrollEnabled
+            webView.scrollView.isScrollEnabled = scrollEnabled
         }
     }
 
@@ -80,7 +80,7 @@ public class RichEditorView: UIView {
         Input accessory view to display over they keyboard.
         Defaults to nil
     */
-    public override var inputAccessoryView: UIView? {
+    open override var inputAccessoryView: UIView? {
         get { return webView.cjw_inputAccessoryView }
         set { webView.cjw_inputAccessoryView = newValue }
     }
@@ -88,13 +88,13 @@ public class RichEditorView: UIView {
     /**
         The internal UIWebView that is used to display the text.
     */
-    public private(set) var webView: UIWebView
+    open fileprivate(set) var webView: UIWebView
     
     /**
         Whether or not to allow user input in the view.
     */
-    private var editingEnabledVar = true
-    public var editingEnabled: Bool {
+    fileprivate var editingEnabledVar = true
+    open var editingEnabled: Bool {
         get { return isContentEditable() }
         set { setContentEditable(newValue) }
     }
@@ -103,17 +103,17 @@ public class RichEditorView: UIView {
         The placeholder text that should be shown when there is no user input.
         To set, use `setPlaceholderText(text: String)`
     */
-    public private(set) var placeholder: String = ""
+    open fileprivate(set) var placeholder: String = ""
 
-    private var editorLoaded = false
+    fileprivate var editorLoaded = false
     
     /**
         The internal height of the text being displayed.
         Is continually being updated as the text is edited.
     */
-    public private(set) var editorHeight: Int = 0 {
+    open fileprivate(set) var editorHeight: Int = 0 {
         didSet {
-            delegate?.richEditor?(self, heightDidChange: editorHeight)
+            delegate?.richEditor?(editor: self, heightDidChange: editorHeight)
         }
     }
 
@@ -121,9 +121,9 @@ public class RichEditorView: UIView {
         The content HTML of the text being displayed.
         Is continually updated as the text is being edited.
     */
-    public private(set) var contentHTML: String = "" {
+    open fileprivate(set) var contentHTML: String = "" {
         didSet {
-            delegate?.richEditor?(self, contentDidChange: contentHTML)
+            delegate?.richEditor?(editor: self, contentDidChange: contentHTML)
         }
     }
 
@@ -131,7 +131,7 @@ public class RichEditorView: UIView {
         The inner height of the editor div.
         Fetches it from JS every time, so might be slow!
     */
-    private var clientHeight: Int {
+    fileprivate var clientHeight: Int {
         let heightStr = runJS("document.getElementById('editor').clientHeight;")
         return (heightStr as NSString).integerValue
     }
@@ -150,18 +150,18 @@ public class RichEditorView: UIView {
         setup()
     }
     
-    private func setup() {
-        self.backgroundColor = UIColor.redColor()
+    fileprivate func setup() {
+        self.backgroundColor = UIColor.red
         
         webView.frame = self.bounds
         webView.delegate = self
         webView.keyboardDisplayRequiresUserAction = false
         webView.scalesPageToFit = false
-        webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        webView.dataDetectorTypes = .None
-        webView.backgroundColor = UIColor.whiteColor()
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        webView.dataDetectorTypes = UIDataDetectorTypes()
+        webView.backgroundColor = UIColor.white
         
-        webView.scrollView.scrollEnabled = scrollEnabled
+        webView.scrollView.isScrollEnabled = scrollEnabled
         webView.scrollView.bounces = false
         webView.scrollView.delegate = self
         webView.scrollView.clipsToBounds = false
@@ -170,9 +170,9 @@ public class RichEditorView: UIView {
         
         self.addSubview(webView)
         
-        if let filePath = NSBundle(forClass: RichEditorView.self).pathForResource("rich_editor", ofType: "html") {
-            let url = NSURL(fileURLWithPath: filePath, isDirectory: false)
-            let request = NSURLRequest(URL: url)
+        if let filePath = Bundle(for: RichEditorView.self).path(forResource: "rich_editor", ofType: "html") {
+            let url = URL(fileURLWithPath: filePath, isDirectory: false)
+            let request = URLRequest(url: url)
             webView.loadRequest(request)
         }
 
@@ -380,8 +380,9 @@ extension RichEditorView {
         - parameter js: The JavaScript string to be run
         - returns: The result of the JavaScript that was run
     */
-    public func runJS(js: String) -> String {
-        let string = webView.stringByEvaluatingJavaScriptFromString(js) ?? ""
+    @discardableResult
+    public func runJS(_ js: String) -> String {
+        let string = webView.stringByEvaluatingJavaScript(from: js) ?? ""
         return string
     }
 }
@@ -390,7 +391,7 @@ extension RichEditorView {
 // MARK: - UIScrollViewDelegate
 extension RichEditorView: UIScrollViewDelegate {
 
-    public func scrollViewDidScroll(scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // We use this to keep the scroll view from changing its offset when the keyboard comes up
         if !scrollEnabled {
             scrollView.bounds = webView.bounds
@@ -402,20 +403,20 @@ extension RichEditorView: UIScrollViewDelegate {
 // MARK: - UIWebViewDelegate
 extension RichEditorView: UIWebViewDelegate {
 
-    public func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
 
         // Handle pre-defined editor actions
         let callbackPrefix = "re-callback://"
-        if request.URL?.absoluteString.hasPrefix(callbackPrefix) == true {
+        if request.url?.absoluteString.hasPrefix(callbackPrefix) == true {
             
             // When we get a callback, we need to fetch the command queue to run the commands
             // It comes in as a JSON array of commands that we need to parse
             let commands = runJS("RE.getCommandQueue();")
-            if let data = (commands as NSString).dataUsingEncoding(NSUTF8StringEncoding) {
+            if let data = (commands as NSString).data(using: String.Encoding.utf8.rawValue) {
                 
                 let jsonCommands: [String]?
                 do {
-                    jsonCommands = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)) as? [String]
+                    jsonCommands = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? [String]
                 } catch {
                     jsonCommands = nil
                     NSLog("Failed to parse JSON Commands")
@@ -432,10 +433,10 @@ extension RichEditorView: UIWebViewDelegate {
         }
         
         // User is tapping on a link, so we should react accordingly
-        if navigationType == .LinkClicked {
+        if navigationType == .linkClicked {
             if let
-                url = request.URL,
-                shouldInteract = delegate?.richEditor?(self, shouldInteractWithURL:url)
+                url = request.url,
+                let shouldInteract = delegate?.richEditor?(editor: self, shouldInteractWithURL:url)
             {
                 return shouldInteract
             }
@@ -454,7 +455,7 @@ extension RichEditorView: UIGestureRecognizerDelegate {
         Delegate method for our UITapGestureDelegate.
         Since the internal web view also has gesture recognizers, we have to make sure that we actually receive our taps.
     */
-    public func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 
@@ -464,7 +465,7 @@ extension RichEditorView: UIGestureRecognizerDelegate {
 // MARK: - Private Implementation Details
 extension RichEditorView {
 
-    private func updateHeight() {
+    fileprivate func updateHeight() {
         let heightStr = runJS("document.getElementById('editor').clientHeight;")
         let height = (heightStr as NSString).integerValue
         if editorHeight != height {
@@ -472,7 +473,7 @@ extension RichEditorView {
         }
     }
 
-    private func isContentEditable() -> Bool {
+    fileprivate func isContentEditable() -> Bool {
         if editorLoaded {
             let value = runJS("RE.editor.isContentEditable") as NSString
             editingEnabledVar = value.boolValue
@@ -481,7 +482,7 @@ extension RichEditorView {
         return editingEnabledVar
     }
     
-    private func setContentEditable(editable: Bool) {
+    fileprivate func setContentEditable(_ editable: Bool) {
         editingEnabledVar = editable
         if editorLoaded {
             let value = editable ? "true" : "false"
@@ -498,7 +499,7 @@ extension RichEditorView {
 
         - returns: Relative offset position of the caret
      */
-    private func getRelativeCaretYPosition() -> Int {
+    fileprivate func getRelativeCaretYPosition() -> Int {
         let string = runJS("RE.getRelativeCaretYPosition();")
         return (string as NSString).integerValue
     }
@@ -507,11 +508,11 @@ extension RichEditorView {
         Scrolls the editor to a position where the caret is visible.
         Called repeatedly to make sure the caret is always visible when inputting text.
     */
-    private func scrollCaretToVisible() {
+    fileprivate func scrollCaretToVisible() {
         let scrollView = self.webView.scrollView
         
         let contentHeight = clientHeight > 0 ? CGFloat(clientHeight) : scrollView.frame.height
-        scrollView.contentSize = CGSizeMake(scrollView.frame.width, contentHeight)
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentHeight)
         
         // TODO: Make these either more dynamic or customizable!
         let lineHeight: CGFloat = 28.0
@@ -544,7 +545,7 @@ extension RichEditorView {
         - parameter   color: The color to convert to hex
         - returns: The hexadecimal representation of the color
     */
-    private func colorToHex(color: UIColor) -> String {
+    fileprivate func colorToHex(_ color: UIColor) -> String {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
@@ -565,18 +566,15 @@ extension RichEditorView {
         - parameter   string: The string to be escaped
         - returns: The string with all ' characters escaped
     */
-    private func escape(string: String) -> String {
-        let unicode = string.unicodeScalars
+    fileprivate func escape(_ string: String) -> String {
         var newString = ""
-        
-        for i in unicode.startIndex..<unicode.endIndex {
-            let char = unicode[i]
+        for char in string.unicodeScalars {
             if char.value < 9 || (char.value > 9 && char.value < 32) // < 32 == special characters in ASCII, 9 == horizontal tab in ASCII
                 || char.value == 39 { // 39 == ' in ASCII
-                let escaped = char.escape(asASCII: true)
-                newString.appendContentsOf(escaped)
+                let escaped = char.escaped(asASCII: true)
+                newString.append(escaped)
             } else {
-                newString.append(char)
+                newString.append(String(char))
             }
         }
         return newString
@@ -587,15 +585,15 @@ extension RichEditorView {
         
         - parameter method: String with the name of the method and optional parameters that were passed in
     */
-    private func performCommand(method: String) {
+    fileprivate func performCommand(_ method: String) {
         if method.hasPrefix("ready") {
             // If loading for the first time, we have to set the content HTML to be displayed
             if !editorLoaded {
                 editorLoaded = true
-                setHTML(contentHTML)
+                setHTML(html: contentHTML)
                 setContentEditable(editingEnabledVar)
-                setPlaceholderText(placeholder)
-                delegate?.richEditorDidLoad?(self)
+                setPlaceholderText(text: placeholder)
+                delegate?.richEditorDidLoad?(editor: self)
             }
             updateHeight()
         }
@@ -609,10 +607,10 @@ extension RichEditorView {
             updateHeight()
         }
         else if method.hasPrefix("focus") {
-            delegate?.richEditorTookFocus?(self)
+            delegate?.richEditorTookFocus?(editor: self)
         }
         else if method.hasPrefix("blur") {
-            delegate?.richEditorLostFocus?(self)
+            delegate?.richEditorLostFocus?(editor: self)
         }
         else if method.hasPrefix("action/") {
             let content = runJS("RE.getHtml()")
@@ -621,9 +619,10 @@ extension RichEditorView {
             // If there are any custom actions being called
             // We need to tell the delegate about it
             let actionPrefix = "action/"
-            let range = actionPrefix.startIndex..<actionPrefix.endIndex
-            let action = method.stringByReplacingCharactersInRange(range, withString: "")
-            delegate?.richEditor?(self, handleCustomAction: action)
+            let range = actionPrefix.characters.startIndex..<actionPrefix.characters.endIndex
+            let action = method.replacingCharacters(in: range, with: "")
+        
+            delegate?.richEditor?(editor: self, handleCustomAction: action)
         }
     }
 
