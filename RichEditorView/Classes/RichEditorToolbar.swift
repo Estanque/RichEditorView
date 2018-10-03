@@ -119,6 +119,18 @@ open class RichEditorToolbar: UIView {
         setup()
     }
     
+    override open func didMoveToWindow() {
+        super.didMoveToWindow()
+        if #available(iOS 11.0, *) {
+            if let window = window {
+                // fix toolbar position on iOS 11 edgeless phones
+                bottomAnchor.constraint(
+                    lessThanOrEqualToSystemSpacingBelow: window.safeAreaLayoutGuide.bottomAnchor,
+                    multiplier: 1.0).isActive = true
+            }
+        }
+    }
+    
     fileprivate func setup() {
         self.autoresizingMask = .flexibleWidth
 
