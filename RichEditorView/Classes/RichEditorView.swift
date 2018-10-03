@@ -403,7 +403,7 @@ extension RichEditorView: UIScrollViewDelegate {
 // MARK: - UIWebViewDelegate
 extension RichEditorView: UIWebViewDelegate {
 
-    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
 
         // Handle pre-defined editor actions
         let callbackPrefix = "re-callback://"
@@ -617,9 +617,9 @@ extension RichEditorView {
             contentHTML = content
             
             // If there are any custom actions being called
-            // We need to tell the delegate about it
+            // We need to tell the delegate about its
             let actionPrefix = "action/"
-            let range = actionPrefix.characters.startIndex..<actionPrefix.characters.endIndex
+            let range = actionPrefix.startIndex..<actionPrefix.endIndex
             let action = method.replacingCharacters(in: range, with: "")
         
             delegate?.richEditor?(editor: self, handleCustomAction: action)
@@ -630,7 +630,7 @@ extension RichEditorView {
         Called by the UITapGestureRecognizer when the user taps the view.
         If we are not already the first responder, focus the editor.
     */
-    internal func viewWasTapped() {
+    @objc internal func viewWasTapped() {
         if !webView.containsFirstResponder {
             focus()
         }
