@@ -330,7 +330,7 @@ import UIKit
         runJS("RE.insertLink('\(href.escaped)', '\(title.escaped)');")
     }
     
-    public func setScalableFontSize(size: Int) {
+    public func setScalableFontSize(_ size: Int) {
         runJS("RE.prepareInsert();")
         runJS("document.execCommand('fontSize', false, \(size));")
     }
@@ -338,6 +338,10 @@ import UIKit
     public func setFont(fontName: String) {
         runJS("RE.prepareInsert();")
         runJS("document.execCommand('fontName', false, '\(fontName)');")
+    }
+    
+    public func restoreSelection() {
+        runJS("RE.restorerange();")
     }
     
     public func focus() {
