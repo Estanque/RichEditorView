@@ -19,6 +19,10 @@
 		551350681D99278D003F88FC /* font_size@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 551350641D99278D003F88FC /* font_size@2x.png */; };
 		551350691D99278D003F88FC /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = 551350651D99278D003F88FC /* font.png */; };
 		5513506A1D99278D003F88FC /* font@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 551350661D99278D003F88FC /* font@2x.png */; };
+		55946E2321C7BCFC005B99B3 /* barcode@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55946E2121C7BCFC005B99B3 /* barcode@2x.png */; };
+		55946E2421C7BCFC005B99B3 /* barcode.png in Resources */ = {isa = PBXBuildFile; fileRef = 55946E2221C7BCFC005B99B3 /* barcode.png */; };
+		55946E2721C7BD05005B99B3 /* ordered_list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55946E2521C7BD05005B99B3 /* ordered_list@2x.png */; };
+		55946E2821C7BD05005B99B3 /* ordered_list.png in Resources */ = {isa = PBXBuildFile; fileRef = 55946E2621C7BD05005B99B3 /* ordered_list.png */; };
 		947A71A11C0F9DED00BDF9FC /* UIView+Responder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947A71A01C0F9DED00BDF9FC /* UIView+Responder.swift */; };
 		FBA6AAFF1AD3EC9F00721644 /* RichEditorView.h in Headers */ = {isa = PBXBuildFile; fileRef = FBA6AAFE1AD3EC9F00721644 /* RichEditorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FBA6AB051AD3EC9F00721644 /* RichEditorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6AAF91AD3EC9F00721644 /* RichEditorView.framework */; };
@@ -106,6 +110,10 @@
 		551350641D99278D003F88FC /* font_size@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "font_size@2x.png"; sourceTree = "<group>"; };
 		551350651D99278D003F88FC /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
 		551350661D99278D003F88FC /* font@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "font@2x.png"; sourceTree = "<group>"; };
+		55946E2121C7BCFC005B99B3 /* barcode@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barcode@2x.png"; sourceTree = "<group>"; };
+		55946E2221C7BCFC005B99B3 /* barcode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barcode.png; sourceTree = "<group>"; };
+		55946E2521C7BD05005B99B3 /* ordered_list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ordered_list@2x.png"; sourceTree = "<group>"; };
+		55946E2621C7BD05005B99B3 /* ordered_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ordered_list.png; sourceTree = "<group>"; };
 		947A71A01C0F9DED00BDF9FC /* UIView+Responder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Responder.swift"; path = "Classes/UIView+Responder.swift"; sourceTree = "<group>"; };
 		FBA6AAF91AD3EC9F00721644 /* RichEditorView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RichEditorView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA6AAFD1AD3EC9F00721644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -289,6 +297,10 @@
 		FBA6AB1D1AD3ED2D00721644 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				55946E2621C7BD05005B99B3 /* ordered_list.png */,
+				55946E2521C7BD05005B99B3 /* ordered_list@2x.png */,
+				55946E2221C7BCFC005B99B3 /* barcode.png */,
+				55946E2121C7BCFC005B99B3 /* barcode@2x.png */,
 				FBA6AB1E1AD3ED2D00721644 /* bg_color.png */,
 				FBA6AB1F1AD3ED2D00721644 /* bg_color@2x.png */,
 				FBA6AB201AD3ED2D00721644 /* bold.png */,
@@ -450,11 +462,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55946E2321C7BCFC005B99B3 /* barcode@2x.png in Resources */,
 				FBA6AB641AD3ED2D00721644 /* h6@2x.png in Resources */,
 				FBA6AB541AD3ED2D00721644 /* bg_color@2x.png in Resources */,
 				FBA6AB731AD3ED2D00721644 /* outdent.png in Resources */,
 				FBA6AB591AD3ED2D00721644 /* h1.png in Resources */,
 				FBA6AB691AD3ED2D00721644 /* insert_link.png in Resources */,
+				55946E2421C7BCFC005B99B3 /* barcode.png in Resources */,
 				FBA6AB5E1AD3ED2D00721644 /* h3@2x.png in Resources */,
 				FBA6AB781AD3ED2D00721644 /* strikethrough@2x.png in Resources */,
 				FBA6AB661AD3ED2D00721644 /* indent@2x.png in Resources */,
@@ -488,12 +502,14 @@
 				FBA6AB6A1AD3ED2D00721644 /* insert_link@2x.png in Resources */,
 				551350561D9926F3003F88FC /* quick_link@2x.png in Resources */,
 				FBA6AB761AD3ED2D00721644 /* redo@2x.png in Resources */,
+				55946E2721C7BD05005B99B3 /* ordered_list@2x.png in Resources */,
 				FBA6AB6D1AD3ED2D00721644 /* justify_center.png in Resources */,
 				FBA6AB701AD3ED2D00721644 /* justify_left@2x.png in Resources */,
 				551350681D99278D003F88FC /* font_size@2x.png in Resources */,
 				551350551D9926F3003F88FC /* quick_link.png in Resources */,
 				FBA6AB611AD3ED2D00721644 /* h5.png in Resources */,
 				5513505A1D99270D003F88FC /* paragraph@2x.png in Resources */,
+				55946E2821C7BD05005B99B3 /* ordered_list.png in Resources */,
 				FBA6AB7E1AD3ED2D00721644 /* text_color@2x.png in Resources */,
 				FBA6AB811AD3ED2D00721644 /* undo.png in Resources */,
 				FBA6AB511AD3ED2D00721644 /* rich_editor.js in Resources */,
@@ -686,7 +702,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -708,7 +724,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -729,7 +745,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cjwirth.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -746,7 +762,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cjwirth.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

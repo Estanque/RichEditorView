@@ -106,6 +106,7 @@ public enum RichEditorOptions: RichEditorOption {
     case Image
     case link
     case quickLink
+    case barcode
     
     public static func all() -> [RichEditorOption] {
         return [
@@ -117,7 +118,7 @@ public enum RichEditorOptions: RichEditorOption {
             textColor, textBackgroundColor,
             header(1), header(2), header(3), header(4), header(5), header(6),
             indent, outdent, orderedList, unorderedList,
-            alignLeft, alignCenter, alignRight, Image, link, quickLink
+            alignLeft, alignCenter, alignRight, Image, link, quickLink, barcode
         ]
     }
     
@@ -151,6 +152,7 @@ public enum RichEditorOptions: RichEditorOption {
         case .Image: name = "insert_image"
         case .link: name = "insert_link"
         case .quickLink: name = "quick_link"
+        case .barcode: name = "barcode"
         }
         
         let bundle = Bundle(for: RichEditorToolbar.self)
@@ -184,6 +186,7 @@ public enum RichEditorOptions: RichEditorOption {
         case .Image: return NSLocalizedString("Image", comment: "")
         case .link: return NSLocalizedString("Link", comment: "")
         case .quickLink: return NSLocalizedString("QuickLink", comment: "")
+        case .barcode: return NSLocalizedString("Barcode", comment: "")
         }
     }
     
@@ -215,6 +218,7 @@ public enum RichEditorOptions: RichEditorOption {
             case .Image: toolbar.delegate?.richEditorToolbarInsertImage?(toolbar: toolbar)
             case .link: toolbar.delegate?.richEditorToolbarInsertLink?(toolbar: toolbar)
             case .quickLink: toolbar.editor?.quickLink()
+            case .barcode: toolbar.delegate?.richEditorToolbarInsertBarcode?(toolbar: toolbar)
             }
         }
     }

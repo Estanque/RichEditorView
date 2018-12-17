@@ -113,4 +113,8 @@ extension ViewController: RichEditorToolbarDelegate {
             toolbar.editor?.insertLink(href: "http://github.com/cjwirth/RichEditorView", title: "Github Link")
         }
     }
+    
+    func richEditorToolbarInsertBarcode(toolbar: RichEditorToolbar) {
+        toolbar.editor?.insert(html: "</br>1234</br>")
+    }
 }

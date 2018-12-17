@@ -304,6 +304,11 @@ extension RichEditorView {
         runJS("RE.setJustifyRight();")
     }
     
+    public func insert(html: String) {
+        runJS("RE.prepareInsert();")
+        runJS("RE.insertHTML('\(html)');")
+    }
+    
     public func insertBase64Image(base64Image: String) {
         runJS("RE.prepareInsert();")
         runJS("RE.insertBase64Image('\(base64Image)');")
@@ -325,7 +330,7 @@ extension RichEditorView {
     
     public func setScalableFontSize(size: Int) {
         restoreSelection()
-        runJS("document.execCommand('fontSize', false, \(size));")
+        runJS("document.execCommand('nfontSize', false, \(size));")
     }
     
     public func setFont(fontName: String) {

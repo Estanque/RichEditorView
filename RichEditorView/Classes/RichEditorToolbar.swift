@@ -47,6 +47,9 @@ import UIKit
         Called when the Isert Link toolbar item is pressed.
     */
     @objc optional func richEditorToolbarChangeInsertLink(toolbar: RichEditorToolbar)
+    
+    /// Called when barcode button tap
+    @objc optional func richEditorToolbarInsertBarcode(toolbar: RichEditorToolbar)
 }
 
 
@@ -124,8 +127,8 @@ open class RichEditorToolbar: UIView {
         if #available(iOS 11.0, *) {
             if let window = window {
                 // fix toolbar position on iOS 11 edgeless phones
-                bottomAnchor.constraint(
-                    lessThanOrEqualToSystemSpacingBelow: window.safeAreaLayoutGuide.bottomAnchor,
+                bottomAnchor.constraintLessThanOrEqualToSystemSpacingBelow(
+                    window.safeAreaLayoutGuide.bottomAnchor,
                     multiplier: 1.0).isActive = true
             }
         }
