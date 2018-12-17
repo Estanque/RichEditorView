@@ -90,4 +90,8 @@ extension ViewController: RichEditorToolbarDelegate {
             toolbar.editor?.insertLink("http://github.com/cjwirth/RichEditorView", title: "Github Link")
         }
     }
+    
+    func richEditorToolbarChangeFontSize(_ toolbar: RichEditorToolbar) {
+        toolbar.editor?.setScalableFontSize(size: 7)
+    }
 }
