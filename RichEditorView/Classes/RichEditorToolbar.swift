@@ -22,6 +22,12 @@ import UIKit
 
     /// Called when the Insert Link toolbar item is pressed.
     @objc optional func richEditorToolbarInsertLink(_ toolbar: RichEditorToolbar)
+    
+    /// Called when the Change font toolbar item is pressed.
+    @objc optional func richEditorToolbarChangeFont(_ toolbar: RichEditorToolbar)
+    
+    /// Called when the Change font size toolbar item is pressed.
+    @objc optional func richEditorToolbarChangeFontSize(_ toolbar: RichEditorToolbar)
 }
 
 /// RichBarButtonItem is a subclass of UIBarButtonItem that takes a callback as opposed to the target-action pattern

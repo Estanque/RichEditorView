@@ -53,6 +53,7 @@ public struct RichEditorOptionItem: RichEditorOption {
 /// RichEditorOptions is an enum of standard editor actions
 public enum RichEditorDefaultOption: RichEditorOption {
 
+    case keyboard
     case clear
     case undo
     case redo
@@ -64,6 +65,8 @@ public enum RichEditorDefaultOption: RichEditorOption {
     case underline
     case textColor
     case textBackgroundColor
+    case font
+    case fontSize
     case header(Int)
     case indent
     case outdent
@@ -76,9 +79,11 @@ public enum RichEditorDefaultOption: RichEditorOption {
     case link
     
     public static let all: [RichEditorDefaultOption] = [
+        .keyboard,
         .clear,
         .undo, .redo, .bold, .italic,
         .subscript, .superscript, .strike, .underline,
+        .font, .fontSize,
         .textColor, .textBackgroundColor,
         .header(1), .header(2), .header(3), .header(4), .header(5), .header(6),
         .indent, outdent, orderedList, unorderedList,
@@ -90,6 +95,7 @@ public enum RichEditorDefaultOption: RichEditorOption {
     public var image: UIImage? {
         var name = ""
         switch self {
+        case .keyboard: name = "keyboard"
         case .clear: name = "clear"
         case .undo: name = "undo"
         case .redo: name = "redo"
@@ -101,6 +107,8 @@ public enum RichEditorDefaultOption: RichEditorOption {
         case .underline: name = "underline"
         case .textColor: name = "text_color"
         case .textBackgroundColor: name = "bg_color"
+        case .font: return "font"
+        case .fontSize: return "font_size"
         case .header(let h): name = "h\(h)"
         case .indent: name = "indent"
         case .outdent: name = "outdent"
@@ -119,6 +127,7 @@ public enum RichEditorDefaultOption: RichEditorOption {
     
     public var title: String {
         switch self {
+        case .keyboard: return NSLocalizedString("Keyboard", comment: "")
         case .clear: return NSLocalizedString("Clear", comment: "")
         case .undo: return NSLocalizedString("Undo", comment: "")
         case .redo: return NSLocalizedString("Redo", comment: "")
@@ -130,6 +139,8 @@ public enum RichEditorDefaultOption: RichEditorOption {
         case .underline: return NSLocalizedString("Underline", comment: "")
         case .textColor: return NSLocalizedString("Color", comment: "")
         case .textBackgroundColor: return NSLocalizedString("BG Color", comment: "")
+        case .font: return NSLocalizedString("Font", comment: "")
+        case .fontSize: return NSLocalizedString("FontSize", comment: "")
         case .header(let h): return NSLocalizedString("H\(h)", comment: "")
         case .indent: return NSLocalizedString("Indent", comment: "")
         case .outdent: return NSLocalizedString("Outdent", comment: "")
@@ -145,6 +156,7 @@ public enum RichEditorDefaultOption: RichEditorOption {
     
     public func action(_ toolbar: RichEditorToolbar) {
         switch self {
+        case .keyboard: toolbar.editor?.blur()
         case .clear: toolbar.editor?.removeFormat()
         case .undo: toolbar.editor?.undo()
         case .redo: toolbar.editor?.redo()
@@ -156,6 +168,8 @@ public enum RichEditorDefaultOption: RichEditorOption {
         case .underline: toolbar.editor?.underline()
         case .textColor: toolbar.delegate?.richEditorToolbarChangeTextColor?(toolbar)
         case .textBackgroundColor: toolbar.delegate?.richEditorToolbarChangeBackgroundColor?(toolbar)
+        case .font: toolbar.delegate?.richEditorToolbarChangeFont?(toolbar)
+        case .fontSize: toolbar.delegate?.richEditorToolbarChangeFontSize?(toolbar)
         case .header(let h): toolbar.editor?.header(h)
         case .indent: toolbar.editor?.indent()
         case .outdent: toolbar.editor?.outdent()
