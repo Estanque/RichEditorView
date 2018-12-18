@@ -92,6 +92,6 @@ extension ViewController: RichEditorToolbarDelegate {
     }
     
     func richEditorToolbarChangeFontSize(_ toolbar: RichEditorToolbar) {
-        toolbar.editor?.setScalableFontSize(size: 7)
+        toolbar.editor?.setScalableFontSize(7)
     }
 }
